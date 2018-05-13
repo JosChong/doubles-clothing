@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+<script type="text/javascript">
+  {% block JQuery %}
+    var clientToken = "{{client_token}}";
+
+    braintree.setup(clientToken, "dropin", {container: "payment-form"});
+  {% endblock JQuery %}
+</script>
+
+{% block content %}
+
+{% if not user_can_continue %}
+
+<div class="row">
+  <div class='col-sm-6'>
+  <p class='lead'>Continue as Guest</p>
+
+  <form method='POST' action=''>{% csrf_token %}
+  {{ form|crispy }}
+  <input type='submit' class='btn btn-dark' value='Continue as Guest' />
+
+  </form>
+  </div>
+  <div class='col-sm-6'>
+  <p class='lead'>Login to Continue</p>
+  <form method='POST' action="{% url 'account_login' %}"> {% csrf_token %}
+  {{ login_form|crispy }}
+
+  <input type='hidden' name='next' value='{{ next_url }}' />
+  <input type='submit' class='btn btn-dark' value='Login' />
+  </form>
+  <p class='text-center'>
+
+  <p><a href="{% url 'account_reset_password' %}">{% trans "Forgot your password?" %}</a></p>
+  <p><a href="{% url 'account_signup' %}">{% trans "Not a member? Sign up now!" %}</a></p>
+  </p>
+
+  </div>
+</div>
+
+{% else %}
+
+<div class="row">
+  <div class='col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center'>
+    {% include "orders/order_summary.html" with order=order %}
+    <br>
+    <form id="checkout" class="" action="{% url 'complete_checkout_view' %}" method="POST">{%csrf_token%}
+      {# <input type = "hidden" name = "payment_token" value = "ABC">#}
+      <div id="payment-form"></div>
+      <div><b><button class="btn btn-dark" type="submit">Complete Order</button></b></div>
+    </form>
+    <br>
+  </div>
+</div>
+
+
+{% endif %}
+
+
+{% endblock %}

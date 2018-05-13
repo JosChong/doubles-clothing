@@ -1,0 +1,292 @@
+* {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 18vw;
+}
+
+.container {
+  width: 100%;
+}
+
+.img-constrain {
+  max-width: 100%;
+}
+
+header {
+  background: linear-gradient(lightgrey, white, white);
+}
+
+.inline-block {
+  display: inline-block;
+  clear: left;
+}
+
+.cart {
+  padding-bottom: 0.5vw;
+  width: 2.75vw;
+  height: 2.75vw;
+}
+
+.logo {
+  height: 6vw;
+  width: 6vw;
+  position: absolute;
+  top: -0.75vw;
+  left: -0.25vw;
+}
+
+.caret {
+  margin-right: 0.5vw;
+}
+
+hr {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.dropdown-user {
+  color: rgba(0, 0, 0, 0.75);
+  margin-left: 0.5vw;
+  margin-bottom: 5px;
+}
+
+.no-pad {
+  padding: 0;
+}
+
+.pad {
+  padding: 1vw;
+}
+
+.line {
+  font-size: 2.5vw;
+  padding: 0px;
+  margin-top: 2.5%;
+}
+
+.lineleft {
+  padding: 0px;
+  border-bottom: 2.5px solid black;
+}
+
+.lineright {
+  text-align: right;
+  padding: 0px;
+  border-bottom: 2.5px solid black;
+}
+
+.update {
+  font-size: 1.5vw;
+  color: black;
+}
+
+.update:focus {
+  outline: none !important;
+}
+
+.update:hover {
+  color: #0066CC;
+}
+
+nav a {
+  margin: 0.5vw;
+}
+
+a {
+  color: black;
+}
+
+a:visited {
+  text-decoration: none;
+  color: black;
+}
+
+a:focus {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #0066CC;
+}
+
+.content {
+  margin-top: 2.5%;
+}
+
+.sort {
+  font-size: 1vw;
+  height: 100%;
+  padding-top: 1%;
+  padding-bottom: 2%;
+  border: 5px double black;
+  margin-top: 1vw;
+}
+
+h5 {
+  font-size: 1vw;
+}
+
+h4 {
+  font-size: 1.25vw;
+}
+
+h3 {
+  font-size: 1.5vw;
+}
+
+h2 {
+  font-size: 2vw;
+}
+
+h1 {
+  font-size: 2.5vw;
+}
+
+h1, h2, h4, h5 {
+  margin-top: 0.75vw !important;
+}
+
+h3 {
+  margin-top: 1.5vw !important;
+}
+
+label {
+  margin-right: 5%;
+}
+
+.sortmenu {
+  font-size: 1.25vw;
+  text-align: right;
+}
+
+.samples {
+  width: 100%;
+  margin-top: 2.5%;
+  margin-left: 2.5%;
+}
+
+.samples img {
+  width: 100%;
+  height: 16vw;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.samples img:hover {
+  border: 2px solid rgba(0, 102, 204, 0.75);
+}
+
+.left-arrow {
+  padding-left: 0;
+}
+
+.right-arrow {
+  padding-right: 0;
+}
+
+.horizontalspace {
+  display: inline-block;
+  width: 5%;
+}
+
+.verticalspace {
+  display: inline-block;
+  height: 5%;
+  width: 100%;
+}
+
+.arrows {
+  width: 100%;
+  margin-top: 2.5%;
+  margin-left: 2.5%;
+}
+
+.arrows img {
+  height: 100%;
+  width: 100%;
+}
+
+.previous {
+  display: inline-block;
+}
+
+.next {
+  display: inline-block;
+  float: right;
+}
+
+.dropdown-menu {
+  min-width: 10vw;
+}
+
+.dropdown-item {
+  font-size: 1.25vw;
+}
+
+footer {
+  font-size: 1.25vw;
+  color: white;
+  background-color: black;
+  padding-top: 1.5vw;
+  margin-top: 4vw;
+
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 14vw;
+  width: 100%;
+  overflow:hidden;
+}
+
+footer a {
+  color: white;
+}
+
+footer a:visited {
+  color: white;
+}
+
+.black {
+  color: black;
+}
+
+.space {
+  padding-left: 1vw;
+}
+
+table {
+  font-size: 1.5vw;
+}
+
+td {
+  vertical-align: middle !important;
+}
+
+.btn-dark {
+  font-size: 1.25vw;
+  color: white !important;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.btn-dark:hover {
+  color: white;
+  background-color: black;
+}
+
+.btn-dark:focus {
+  outline: none !important;
+}
+
+.btn-space {
+  margin-top: 0.5vw;
+}

@@ -1,0 +1,41 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Doubles Clothing</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/splash.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-3 col-xs-3"></div>
+
+        <div class="col-md-6 col-xs-6 center">
+          <img src="{% static 'images/logo.png' %}" class="logo">
+          <h1 class="name">oubles Clothing</h1>
+        </div>
+
+        <div class="col-md-3 col-xs-3"></div>
+
+      </div>
+      <div class="row">
+
+        <div class="col-md-3 col-xs-3"></div>
+
+        <div class="col-md-6 col-xs-6 center">
+          <a href="/browse?page=1" class="enter">ENTER SITE</a>
+        </div>
+
+        <div class="col-md-3 col-xs-3"></div>
+
+      </div>
+    </div>
+  </body>
+</html>

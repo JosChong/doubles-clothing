@@ -1,0 +1,117 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Doubles Clothing</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/master.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+
+    <header class="container">
+      <div class="row">
+
+        <div class="col-md-1 col-xs-1"></div>
+
+        <div class="col-md-10 col-xs-10 line">
+          <div class="row">
+
+            <div class="col-md-1 col-xs-1">
+              <a href="/browse?page=1"><img src="{% static 'images/logo.png' %}" class="logo"></a>
+            </div>
+
+            <div class="col-md-7 col-xs-7 lineleft">
+              <nav>
+                <a href="/browse/collections?page=1">COLLECTIONS</a>
+                <a href="/browse/mens?page=1">MEN'S</a>
+                <a href="/browse/womens?page=1">WOMEN'S</a>
+                <a href="/browse/shoes?page=1">SHOES</a>
+                <a href="/browse/accessories?page=1">ACCESSORIES</a>
+              </nav>
+            </div>
+
+            <div class="col-md-4 col-xs-4 lineright">
+              <nav>
+                {% if user.is_authenticated %}
+                  <div class="dropdown inline-block">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="">ACCOUNT<span class="caret"></span></a>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="/orders/">YOUR ORDERS</a><br>
+                      <a class="dropdown-item" href="/accounts/logout/">LOGOUT</a>
+                      <hr>
+                      <h5 class="dropdown-user">You are signed in as {{user}}</h5>
+                    </div>
+                  </div>
+                  {% else %}
+                  <a href="/accounts/signup/">LOGIN</a>
+                {% endif %}
+                <a id="cart" href="/cart/">
+                  VIEW CART
+                  <img class="cart" src="{% static 'images/cart.png' %}">
+                </a>
+              </nav>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-md-1 col-xs-1"></div>
+
+      </div>
+    </header>
+
+    <div class="body">
+      {% block list %}
+      {% endblock list %}
+
+      <div class="container">
+        <div class="col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1">
+          <div class="verticalspace"></div>
+          <div class="verticalspace"></div>
+          {% block content %}
+          {% endblock content %}
+        </div>
+      </div>
+    </div>
+
+    <footer class="container">
+      <div class="row">
+        <div class="col-md-4 col-xs-4">
+          <nav>
+            <a href="/about">ABOUT</a><br>
+            <a href="/contact">CONTACT US</a><br>
+            <a href="/locations">STORE LOCATIONS</a><br>
+            <a href="/shipping">SHIPPING INFORMATION</a><br>
+            <a href="/faq">FREQUENTLY ASKED QUESTIONS</a><br>
+            <a href="/terms">TERMS AND CONDITIONS</a><br>
+          </nav>
+          <div class="verticalspace"></div>
+        </div>
+      </div>
+    </footer>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $("#JQuery-message").hide();
+        {% block JQuery %}
+        {% endblock JQuery %}
+        $("#cart").hover(highlight, unhighlight);
+      })
+      function highlight(element) {
+        $("#cart > img").attr("src", "{% static 'images/bluecart.png' %}");
+      }
+      function unhighlight(element) {
+        $("#cart > img").attr("src", "{% static 'images/cart.png' %}");
+      }
+    </script>
+    <script src="https://js.braintreegateway.com/js/braintree-2.32.1.min.js"></script>
+
+  </body>
+</html>

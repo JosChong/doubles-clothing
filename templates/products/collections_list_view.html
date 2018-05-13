@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% load static %}
+
+  {% block list %}
+
+    <div class="container content">
+      <div class="row">
+
+        <div class="col-md-1 col-xs-1"></div>
+
+        <div class="col-md-10 col-xs-10">
+          <div class="row">
+
+            <div class="col-md-2 col-xs-2 no-pad">
+              <div class="sort pad">
+                <h4>TYPE</h4>
+                <form action="">
+                  <label for="tops">
+                    <input type="checkbox" name="type" id="tops" value="tops" disabled>&nbsp;&nbsp;Tops
+                  </label>
+                  <label for="bottoms">
+                    <input type="checkbox" name="type" id="bottoms" value="bottoms" disabled>&nbsp;&nbsp;Bottoms
+                  </label>
+                  <label for="hats">
+                    <input type="checkbox" name="type" id="hats" value="hats" disabled>&nbsp;&nbsp;Hats
+                  </label>
+                  <label for="shoes">
+                    <input type="checkbox" name="type" id="shoes" value="shoes" disabled>&nbsp;&nbsp;Shoes
+                  </label>
+                  <label for="accessory">
+                    <input type="checkbox" name="type" id="accessory" value="accessory" disabled>&nbsp;&nbsp;Accessory
+                  </label>
+                </form>
+                <h4>COLOR</h4>
+                <form action="">
+                  <label for="black">
+                    <input type="checkbox" name="type" id="black" value="black" disabled>&nbsp;&nbsp;Black
+                  </label>
+                  <label for="blue">
+                    <input type="checkbox" name="type" id="blue" value="blue" disabled>&nbsp;&nbsp;Blue
+                  </label>
+                  <label for="brown">
+                    <input type="checkbox" name="type" id="brown" value="brown" disabled>&nbsp;&nbsp;Brown
+                  </label>
+                  <label for="green">
+                    <input type="checkbox" name="type" id="green" value="green" disabled>&nbsp;&nbsp;Green
+                  </label>
+                  <label for="grey">
+                    <input type="checkbox" name="type" id="grey" value="grey" disabled>&nbsp;&nbsp;Grey
+                  </label>
+                  <label for="red">
+                    <input type="checkbox" name="type" id="red" value="red" disabled>&nbsp;&nbsp;Red
+                  </label>
+                  <label for="tan">
+                    <input type="checkbox" name="type" id="tan" value="tan" disabled>&nbsp;&nbsp;Tan
+                  </label>
+                  <label for="white">
+                    <input type="checkbox" name="type" id="white" value="white" disabled>&nbsp;&nbsp;White
+                  </label>
+                  <label for="yellow">
+                    <input type="checkbox" name="type" id="yellow" value="yellow" disabled>&nbsp;&nbsp;Yellow
+                  </label>
+                </form>
+                <h4>SIZE</h4>
+                <form action="">
+                  <label for="xs">
+                    <input type="checkbox" name="type" id="xs" value="xs" disabled>&nbsp;&nbsp;XS
+                  </label>
+                  <label for="s">
+                    <input type="checkbox" name="type" id="s" value="s" disabled>&nbsp;&nbsp;S
+                  </label>
+                  <label for="m">
+                    <input type="checkbox" name="type" id="m" value="m" disabled>&nbsp;&nbsp;M
+                  </label>
+                  <label for="l">
+                    <input type="checkbox" name="type" id="l" value="l" disabled>&nbsp;&nbsp;L
+                  </label>
+                  <label for="xl">
+                    <input type="checkbox" name="type" id="xl" value="xl" disabled>&nbsp;&nbsp;XL
+                  </label>
+                </form>
+                <h4>SEASON</h4>
+                <form action="">
+                  <label for="spring">
+                    <input type="checkbox" name="type" id="spring" value="spring" disabled>&nbsp;&nbsp;Spring
+                  </label>
+                  <label for="summer">
+                    <input type="checkbox" name="type" id="summer" value="summer" disabled>&nbsp;&nbsp;Summer
+                  </label>
+                  <label for="fall">
+                    <input type="checkbox" name="type" id="fall" value="fall" disabled>&nbsp;&nbsp;Fall
+                  </label>
+                  <label for="winter">
+                    <input type="checkbox" name="type" id="winter" value="winter" disabled>&nbsp;&nbsp;Winter
+                  </label>
+                </form>
+                <div class="verticalspace"></div>
+              </div>
+              <div class="verticalspace"></div>
+            </div>
+
+            <div class="col-md-10 col-xs-10">
+              <div class="row sortmenu">
+                Sort By:
+                <select>
+                  <option value="popular" disabled>Most Popular</option>
+                  <option value="recent" disabled>Most Recent</option>
+                  <option value="expensive" disabled>Most Expensive</option>
+                  <option value="cheap" disabled>Least Expensive</option>
+                </select>
+              </div>
+              <div class="row samples">
+                {% for object in object_list %}
+                  {% if object.productcolorvariation_set.count > 0 %}
+                    {% for object in object.productcolorvariation_set.all %}
+                      {% if object.productsizevariation_set.count > 0 %}
+                        <div class="col-md-3 col-xs-3 no-pad">
+                          <a href="{{object.get_url}}"><img src="{{object.image.url}}"></a>
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                {% endfor %}
+              </div>
+              <div class="row arrows">
+
+                <div class="col-md-1 col-xs-1 left-arrow">
+                  {% if page_obj.has_previous %}
+                    <a href="/browse/collections?page={{ page_obj.previous_page_number }}"><img src="{% static 'images/leftarrow.png' %}" class="pull-left"></a>
+                  {% endif %}
+                </div>
+
+                <div class="col-md-10 col-xs-10"></div>
+
+                <div class="col-md-1 col-xs-1 right-arrow">
+                  {% if page_obj.has_next %}
+                    <a href="/browse/collections?page={{ page_obj.next_page_number }}"><img src="{% static 'images/rightarrow.png' %}" class="pull-right"></a>
+                  {% endif %}
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-md-1 col-xs-1"></div>
+
+      </div>
+    </div>
+
+  {% endblock list %}

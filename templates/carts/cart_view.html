@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+<script type="text/javascript">
+{% block JQuery %}
+$("#item-qty").change(function(){
+  //event.preventDefault()
+  var item = $(this).prev("input[type='hidden']").val();
+  var qty = $(this).val()
+  var data = {
+    item:item,
+    qty:qty
+  }
+  console.log(data)
+  //TODO Add AJAX call for form
+  $.ajax({
+    type: "GET",
+    url: {% url 'cart_view' %},
+    data: data,
+    success: function(data){
+      $("#Jquery-message").text("Added: " + data.created + " Deleted: " + data.deleted).show()
+      if (data.deleted){
+        $("#item-" + item).fadeOut()
+      } else {
+        $("#item-total-" + item).text(data.item_total)
+        $("#subtotal").text(data.subtotal)
+      }
+      console.log(data)
+    },
+    error:function(response,error){
+      // console.log(response)
+      // console.log(error)
+      $("#add-form").submit()
+    }
+  });
+});
+{% endblock JQuery %}
+</script>
+
+
+{% block content %}
+
+{% if object.cartitem_set.count < 1 %}
+
+<div class="text-center">
+  <h2>Your cart is empty.</h2>
+</div>
+
+{% else %}
+
+<table class = "table">
+{% for item in object.cartitem_set.all %}
+
+<tr id="item-{{item.item.id}}">
+
+  <td>{{ item.item.get_name }}</td>
+
+  <td>
+    <form action= "." method = "GET">
+    <input type='hidden' name='item' value='{{ item.item.id }}' />
+    <input id = "item-qty" type="number" name="qty" value="{{ item.quantity }}">
+    <input type='submit' class='btn-update btn btn-link update' value='Update'/>
+    </form>
+  </td>
+
+  <td id="item-total-{{item.item.id}}">${{ item.item_total}}</td>
+  <td class="text-right"><a href="{{item.remove}}">Remove from Cart</a></td>
+
+</tr>
+
+{% endfor %}
+
+<tr>
+<td id="sub-total" colspan='4' class='text-right'>Subtotal: ${{ object.subtotal }}</td>
+
+</tr>
+
+<tr>
+	<td colspan='4' class='text-right'>Tax (Estimated): <span id='tax-total'>${{ object.tax_total }}</span></td>
+</tr>
+
+<tr>
+	<td colspan='4' class='text-right'>Total: <span id='cart-total'>${{ object.total }}</span></td>
+</tr>
+
+<tr>
+	<td colspan='4' class='text-right'><a class="btn btn-dark btn-space" href="{% url 'checkout_view'%}">Checkout</a></td>
+</tr>
+</table>
+{% endif %}
+{% endblock %}

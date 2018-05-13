@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+<script type="text/javascript">
+{% block JQuery %}
+$("#submit-btn").click(function(event){
+  event.preventDefault()
+  var formData = $("#add-form").serialize()
+  console.log(formData)
+  // AJAX Call for add_to_cart
+  $.ajax({
+    type: "GET",
+    url: {% url 'cart_view' %},
+    data: formData,
+    success: function(data){
+      if (data.created == true) {
+        var display_text = "Item successfully added to cart"
+      } else {
+        var display_text = "Item already in cart"
+      }
+      $("#JQuery-message").text(display_text).show()
+      console.log(data)
+    },
+    error: function(response,error){
+      console.log(response)
+      console.log(error)
+      // $("#add-form").submit();
+    }
+  });
+});
+{% endblock JQuery %}
+</script>
+
+  {% block list %}
+
+    <div class="container content">
+      <div class="row">
+
+        <div class="col-md-1 col-xs-1"></div>
+
+        <div class="col-md-10 col-xs-10">
+          <div class="row">
+
+            <div class="col-md-6 col-xs-6">
+              <div class="row text-center">
+                <h1>{{object.product.name}}</h1>
+              </div>
+              <div class="verticalspace"></div>
+              <div class="row text-center">
+                <img class="img-constrain" src="{{object.image.url}}">
+              </div>
+              <div class="row text-center">
+                {% if object.product.sale_price is None %}
+                  <h2>${{object.product.price}}</h2>
+                  {% else %}
+                  <h2><span style="color:rgba(0,0,0,0.75);text-decoration:line-through;">${{object.product.price}}</span>&nbsp;&nbsp;${{object.product.sale_price}}</h2>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="col-md-6 col-xs-6">
+
+              <h3 class="inline-block">Choose Color:</h3>
+              {% for object in object.product.productcolorvariation_set.all %}
+                <a class="space inline-block" href="{{object.get_url}}"><h3>{{object.color}}</h3></a>
+              {% endfor %}
+
+              <br>
+              <h3 class="inline-block">Choose Size:</h3>
+              {% if object.productsizevariation_set.count >= 1 %}
+                <form class="space inline-block" id = "add-form" method = "GET" action = "{% url 'cart_view' %}">
+                <select class="" name="item">
+                  {% for size_choice in object.productsizevariation_set.all %}
+                    <option value="{{size_choice.id}}">{{ size_choice.size }}</option>
+                  {% endfor %}
+                </select>
+                {% else %}
+              {% endif %}
+              </form>
+              <br>
+              <br>
+              <input id="submit-btn" type="submit" name="" class="btn btn-dark" value="Add to Cart"/>
+
+              <br>
+              <br>
+              <p id="JQuery-message" class="alert alert-success"></p>
+
+            </div>
+
+          </div>
+        </div
+
+        <div class="col-md-1 col-xs-1"></div>
+
+      </div>
+    </div>
+
+  {% endblock list %}
