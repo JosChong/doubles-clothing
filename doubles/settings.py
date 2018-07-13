@@ -33,7 +33,7 @@ SENDGRID_API_KEY = '
 from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 
-# send_mail('Subject', 'Body', 'Full Name <name@email.com>', ['name@email.com'])
+# send_mail('Subject', 'Body', 'Full Name <name@mail.com>', ['name@mail.com'])
 
 # Application definition
 
